@@ -30,10 +30,10 @@ export const useVoteStore = create<VoteStore>((set, get) => ({
     },
     {
       id: '3',
-      name: 'Michael Chen',
-      party: 'Unity Coalition',
+      name: 'Moresh Mukhedkar',
+      party: 'FacultyVoice',
       votes: 0,
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200',
+      image: 'https://dypatiluniversitypune.edu.in/images/schoolofengg/Moresh.jpg',
     },
   ],
   currentUser: null,

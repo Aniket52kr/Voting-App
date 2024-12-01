@@ -1,12 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useVoteStore } from '../store/voteStore';
 import { UserCheck } from 'lucide-react';
 
 export const Login = () => {
   const [name, setName] = useState('');
   const login = useVoteStore((state) => state.login);
+  const [isMetaMaskConnected, setIsMetaMaskConnected] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Check if MetaMask is connected
+    const checkMetaMaskConnection = async () => {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({
+            method: 'eth_accounts',
+          }) as string[]; // Explicitly type accounts as string[]
+          if (accounts.length > 0) {
+            setIsMetaMaskConnected(true);
+          }
+        } catch (error) {
+          console.error('Failed to check MetaMask connection:', error);
+        }
+      }
+    };
+    checkMetaMaskConnection();
+  }, []);
+
+  const connectMetaMask = async () => {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setIsMetaMaskConnected(true);
+        console.log('MetaMask connected');
+      } catch (error) {
+        console.error('MetaMask connection failed:', error);
+      }
+    } else {
+      alert('MetaMask not detected. Please install MetaMask extension.');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim()) {
       login(name);
@@ -21,6 +55,14 @@ export const Login = () => {
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
         Voter Authentication
       </h2>
+      {!isMetaMaskConnected && (
+        <button
+          onClick={connectMetaMask}
+          className="w-full bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600 transition duration-200 mb-4"
+        >
+          Connect MetaMask
+        </button>
+      )}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label
