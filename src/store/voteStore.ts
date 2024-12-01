@@ -16,17 +16,17 @@ export const useVoteStore = create<VoteStore>((set, get) => ({
   candidates: [
     {
       id: '1',
-      name: 'John Smith',
-      party: 'Progressive Party',
+      name: 'Narendra Modi',
+      party: 'BJP',
       votes: 0,
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200&h=200',
+      image: 'https://wallpaperaccess.com/full/1917973.jpg',
     },
     {
       id: '2',
-      name: 'Sarah Johnson',
-      party: 'Future Alliance',
+      name: 'Rahul Gandhi',
+      party: 'INC',
       votes: 0,
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200',
+      image: 'https://th.bing.com/th/id/OIP.xhM_UswNsrlwnP1dEvTZrQHaIO?rs=1&pid=ImgDetMain',
     },
     {
       id: '3',
